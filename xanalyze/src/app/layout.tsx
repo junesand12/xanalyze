@@ -17,7 +17,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "XAnalyze | Neo-Brutalist pNode Analytics",
+  title: "XAnalyze",
   description: "A retro neo-brutalist analytics platform for Xandeum pNodes",
 };
 
@@ -27,15 +27,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${spaceMono.variable}`}>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${spaceMono.variable}`}
+    >
       <body
         className="antialiased min-h-screen bg-background text-foreground"
-        style={{ fontFamily: 'var(--font-space-grotesk), system-ui, sans-serif' }}
+        style={{
+          fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
+        }}
       >
         <NodesProvider>
-          <main className="pb-28 relative z-10">
-            {children}
-          </main>
+          <main className="pb-28 relative z-10">{children}</main>
           <Dock />
           {/* Logo - bottom right */}
           <img

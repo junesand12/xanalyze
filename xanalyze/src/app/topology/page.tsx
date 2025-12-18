@@ -26,18 +26,23 @@ export default function TopologyPage() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-4 flex items-center gap-4 text-sm"
+          className="mb-4 flex items-center justify-between text-sm"
         >
-          <div className="flex items-center gap-2">
-            <Network className="w-4 h-4 text-green" />
-            <span className="font-bold">{onlineCount}</span>
-            <span className="text-gray-500">online nodes</span>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Network className="w-4 h-4 text-green" />
+              <span className="font-bold">{onlineCount}</span>
+              <span className="text-gray-500">online nodes</span>
+            </div>
+            <div className="w-px h-4 bg-gray-300" />
+            <div className="flex items-center gap-2">
+              <span className="font-bold">{nodes.length - onlineCount}</span>
+              <span className="text-gray-500">offline</span>
+            </div>
           </div>
-          <div className="w-px h-4 bg-gray-300" />
-          <div className="flex items-center gap-2">
-            <span className="font-bold">{nodes.length - onlineCount}</span>
-            <span className="text-gray-500">offline</span>
-          </div>
+          <span className="text-xs text-gray-500">
+            <strong>Tip:</strong> Scroll to zoom, drag to pan, click nodes for details.
+          </span>
         </motion.div>
 
         {/* Topology visualization */}
@@ -67,19 +72,6 @@ export default function TopologyPage() {
           ) : (
             <WorldMapTopology />
           )}
-        </motion.div>
-
-        {/* Legend */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="mt-4 text-sm text-gray-500"
-        >
-          <p>
-            <strong>Tip:</strong> Scroll to zoom, drag to pan, click nodes for details.
-            Nodes are grouped by geographic region.
-          </p>
         </motion.div>
       </div>
     </div>
