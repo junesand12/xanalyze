@@ -103,7 +103,7 @@ export function NodeHistoryChart({ data, isLoading, chartType }: NodeHistoryChar
   if (chartType === 'resources') {
     return (
       <div className="h-[140px] w-full">
-        <ResponsiveContainer width="100%" height="100%" minWidth={300} aspect={2.5}>
+        <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#0D0D0D" opacity={0.1} />
             <XAxis
@@ -133,7 +133,7 @@ export function NodeHistoryChart({ data, isLoading, chartType }: NodeHistoryChar
   if (chartType === 'storage') {
     return (
       <div className="h-[140px] w-full">
-        <ResponsiveContainer width="100%" height="100%" minWidth={300} aspect={2.5}>
+        <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 5, right: 5, left: -10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#0D0D0D" opacity={0.1} />
             <XAxis
@@ -172,7 +172,7 @@ export function NodeHistoryChart({ data, isLoading, chartType }: NodeHistoryChar
   if (chartType === 'activity') {
     return (
       <div className="h-[140px] w-full">
-        <ResponsiveContainer width="100%" height="100%" minWidth={300} aspect={2.5}>
+        <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#0D0D0D" opacity={0.1} />
             <XAxis
