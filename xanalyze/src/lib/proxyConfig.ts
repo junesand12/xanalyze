@@ -67,4 +67,17 @@ export const proxyEndpoints = {
   // Compare multiple networks
   chartsComparison: (period: HistoryPeriod = '24h') =>
     `${PROXY_URL}/api/charts/comparison?period=${period}`,
+
+  // ============================================
+  // AI Chat Endpoints
+  // ============================================
+
+  // Check if AI is available
+  aiStatus: () => `${PROXY_URL}/api/ai/status`,
+
+  // Ask AI a question about the network
+  aiAsk: () => `${PROXY_URL}/api/ai/ask`,
+
+  // Get pod credits
+  podCredits: () => `${PROXY_URL}/api/pod-credits`,
 };

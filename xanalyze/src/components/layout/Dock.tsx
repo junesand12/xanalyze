@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -10,8 +11,10 @@ import {
   BarChart3,
   Activity,
   Settings,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AIChatDrawer } from "@/components/ai/AIChatDrawer";
 
 interface DockItem {
   href: string;
@@ -45,34 +48,56 @@ const dockItems: DockItem[] = [
 
 export function Dock() {
   const pathname = usePathname();
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
-    <motion.div
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[95vw]"
-    >
-      <div className="dock-container flex items-end gap-1.5 sm:gap-3 px-2 sm:px-4 py-2 sm:py-3 bg-white/80 border-3 border-black rounded-xl sm:rounded-2xl shadow-brutal">
-        {dockItems.map((item) => (
+    <>
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[95vw]"
+      >
+        <div className="dock-container flex items-end gap-1.5 sm:gap-3 px-2 sm:px-4 py-2 sm:py-3 bg-white/80 border-3 border-black rounded-xl sm:rounded-2xl shadow-brutal">
+          {dockItems.map((item) => (
+            <DockIcon
+              key={item.href}
+              item={item}
+              isActive={pathname === item.href}
+            />
+          ))}
+          <div className="w-px h-8 sm:h-12 bg-black/20 mx-1 sm:mx-2" />
+
+          {/* AI Chat Button - visible on mobile */}
+          <button
+            onClick={() => setIsChatOpen(true)}
+            className="sm:hidden group relative"
+          >
+            <motion.div
+              whileHover={{ scale: 1.15, y: -6 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 600, damping: 20 }}
+              className="relative flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 border-2 border-black bg-white hover:bg-gray-100"
+            >
+              <Sparkles className="w-5 h-5 text-yellow" strokeWidth={2.5} />
+            </motion.div>
+          </button>
+
           <DockIcon
-            key={item.href}
-            item={item}
-            isActive={pathname === item.href}
+            item={{
+              href: "/settings",
+              icon: Settings,
+              label: "Settings",
+              color: "bg-gray-500",
+            }}
+            isActive={pathname === "/settings"}
           />
-        ))}
-        <div className="w-px h-8 sm:h-12 bg-black/20 mx-1 sm:mx-2" />
-        <DockIcon
-          item={{
-            href: "/settings",
-            icon: Settings,
-            label: "Settings",
-            color: "bg-gray-500",
-          }}
-          isActive={pathname === "/settings"}
-        />
-      </div>
-    </motion.div>
+        </div>
+      </motion.div>
+
+      {/* AI Chat Drawer */}
+      <AIChatDrawer isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+    </>
   );
 }
 

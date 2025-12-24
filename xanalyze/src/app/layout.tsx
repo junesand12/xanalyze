@@ -3,6 +3,7 @@ import { Space_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { Dock } from "@/components/layout/Dock";
 import { NodesProvider } from "@/contexts/NodesContext";
+import { AILogoButton } from "@/components/layout/AILogoButton";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -51,13 +52,9 @@ export default function RootLayout({
         <NodesProvider>
           <main className="pb-20 sm:pb-28 relative z-10">{children}</main>
           <Dock />
-          {/* Logo - bottom right (hidden on mobile) */}
-          <img
-            src="/logo.png"
-            alt="Xanalyze"
-            className="hidden sm:block fixed bottom-4 right-4 w-48 h-auto z-50 pointer-events-none select-none"
-          />
         </NodesProvider>
+        {/* AI Logo Button - floating bottom left (hidden on mobile) */}
+        <AILogoButton />
       </body>
     </html>
   );

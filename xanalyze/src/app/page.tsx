@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { NetworkSelector } from "@/components/layout/NetworkSelector";
 import { NetworkStats } from "@/components/dashboard/NetworkStats";
 import { NodeGrid } from "@/components/dashboard/NodeGrid";
+import { TelegramBanner } from "@/components/telegram/TelegramBanner";
 import { useNodes } from "@/contexts/NodesContext";
 import { motion } from "framer-motion";
 
@@ -20,6 +21,9 @@ export default function DashboardPage() {
         >
           <NetworkSelector />
         </PageHeader>
+
+        {/* Telegram Banner */}
+        <TelegramBanner />
 
         {/* Last updated indicator */}
         {lastUpdate && (
