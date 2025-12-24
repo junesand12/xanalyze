@@ -68,8 +68,8 @@
   --font-mono: var(--font-space-mono);
 }
 
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
+/* Dark mode - Disabled to force light mode only */
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: var(--black);
     --foreground: var(--white);
@@ -80,7 +80,7 @@
     --shadow-brutal-lg: 6px 6px 0px var(--white);
     --shadow-brutal-hover: 6px 6px 0px var(--white);
   }
-}
+} */
 
 body {
   background-color: #FAFAFA;

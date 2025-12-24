@@ -450,7 +450,7 @@ export function WorldMapTopology() {
   return (
     <div className="relative w-full h-full" style={{ backgroundColor: '#FAFAFA' }}>
       {/* Controls */}
-      <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
+      <div className="absolute top-4 left-2 sm:left-4 z-10 flex flex-col gap-2">
         <BrutalButton
           onClick={() => setPosition(p => ({ ...p, zoom: Math.min(10, p.zoom * 1.5) }))}
           size="sm"
@@ -469,7 +469,7 @@ export function WorldMapTopology() {
         <BrutalButton
           onClick={() => setShowConnections(s => !s)}
           size="sm"
-          variant={showConnections ? 'purple' : 'outline'}
+          variant={showConnections ? 'green' : 'default'}
           title={showConnections ? 'Hide topology lines' : 'Show topology lines'}
         >
           <Globe className="w-4 h-4" />
@@ -481,7 +481,7 @@ export function WorldMapTopology() {
       </div>
 
       {/* Region Legend */}
-      <div className="absolute top-4 right-4 z-10 brutal-card rounded-lg p-3" style={{ backgroundColor: '#FFFFFF' }}>
+      <div className="absolute top-4 right-2 sm:right-4 z-10 brutal-card rounded-lg p-2 sm:p-3 max-w-[200px] sm:max-w-none" style={{ backgroundColor: '#FFFFFF' }}>
         {/* Back button when zoomed - at top of panel */}
         {viewMode !== 'world' && (
           <motion.div
@@ -771,7 +771,7 @@ export function WorldMapTopology() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="absolute bottom-4 right-4 z-10 brutal-card rounded-lg p-4 w-80"
+            className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 left-2 sm:left-4 md:left-auto z-20 brutal-card rounded-lg p-3 sm:p-4 md:w-80"
             style={{ backgroundColor: '#FFFFFF' }}
           >
             <button
@@ -780,11 +780,11 @@ export function WorldMapTopology() {
             >
               ×
             </button>
-            <h3 className="font-bold text-lg mb-2">
+            <h3 className="font-bold text-base sm:text-lg mb-2 pr-6 break-words">
               {selectedNode.pubkey ? shortenAddress(selectedNode.pubkey, 6) : selectedNode.label}
             </h3>
             <div className="space-y-2 text-sm">
-              <p className="font-mono text-gray-600 text-xs">{selectedNode.address}</p>
+              <p className="font-mono text-gray-600 text-xs break-all">{selectedNode.address}</p>
               <div className="flex items-center gap-2">
                 <span
                   className={cn(
@@ -826,9 +826,12 @@ export function WorldMapTopology() {
         )}
       </AnimatePresence>
 
-      {/* Connection Legend */}
+      {/* Connection Legend - hidden when node detail is shown on mobile */}
       {showConnections && (
-        <div className="absolute bottom-16 left-4 z-10 text-xs brutal-card rounded p-2" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className={cn(
+          "absolute bottom-16 left-2 sm:left-4 z-10 text-xs brutal-card rounded p-2 transition-opacity",
+          selectedNode && "md:opacity-100 opacity-0 pointer-events-none md:pointer-events-auto"
+        )} style={{ backgroundColor: '#FFFFFF' }}>
           <p className="font-bold uppercase text-gray-500 mb-2">Connections</p>
           <div className="space-y-1.5">
             <div className="flex items-center gap-2">
@@ -851,8 +854,11 @@ export function WorldMapTopology() {
         </div>
       )}
 
-      {/* Stats overlay */}
-      <div className="absolute bottom-4 left-4 z-10 text-xs font-mono brutal-card rounded p-2" style={{ backgroundColor: '#FFFFFF' }}>
+      {/* Stats overlay - hidden when node detail is shown on mobile */}
+      <div className={cn(
+        "absolute bottom-2 sm:bottom-4 left-2 sm:left-4 z-10 text-xs font-mono brutal-card rounded p-2 transition-opacity",
+        selectedNode && "md:opacity-100 opacity-0 pointer-events-none md:pointer-events-auto"
+      )} style={{ backgroundColor: '#FFFFFF' }}>
         <div className="flex items-center gap-3 text-gray-600">
           <span>{nodes.length} nodes</span>
           <span className="text-gray-300">|</span>

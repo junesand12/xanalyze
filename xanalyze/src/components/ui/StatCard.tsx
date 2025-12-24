@@ -56,25 +56,25 @@ export function StatCard({
       whileHover={{ x: -2, y: -2 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       className={cn(
-        'brutal-card rounded-lg p-4',
+        'brutal-card rounded-lg p-3 sm:p-4',
         styles.bg,
         className
       )}
     >
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <p className="text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-400 mb-1">
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex-1 min-w-0">
+          <p className="text-xs font-bold uppercase tracking-wider text-gray-600 mb-1 truncate">
             {title}
           </p>
           <motion.p
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-3xl font-bold tracking-tight"
+            className="text-2xl sm:text-3xl font-bold tracking-tight break-words"
           >
             {value}
           </motion.p>
           {subtitle && (
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 font-mono">
+            <p className="text-xs sm:text-sm text-gray-500 mt-1 font-mono truncate">
               {subtitle}
             </p>
           )}
@@ -90,10 +90,10 @@ export function StatCard({
         </div>
         {Icon && (
           <div className={cn(
-            'p-3 rounded-lg border-2 border-black dark:border-white',
+            'p-2 sm:p-3 rounded-lg border-2 border-black flex-shrink-0',
             styles.icon
           )}>
-            <Icon className="w-6 h-6" strokeWidth={2.5} />
+            <Icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
           </div>
         )}
       </div>

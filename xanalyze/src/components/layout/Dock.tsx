@@ -51,9 +51,9 @@ export function Dock() {
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50"
+      className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[95vw]"
     >
-      <div className="dock-container flex items-end gap-3 px-4 py-3 bg-white/80 dark:bg-black/80 border-3 border-black dark:border-white rounded-2xl shadow-brutal">
+      <div className="dock-container flex items-end gap-1.5 sm:gap-3 px-2 sm:px-4 py-2 sm:py-3 bg-white/80 border-3 border-black rounded-xl sm:rounded-2xl shadow-brutal">
         {dockItems.map((item) => (
           <DockIcon
             key={item.href}
@@ -61,7 +61,7 @@ export function Dock() {
             isActive={pathname === item.href}
           />
         ))}
-        <div className="w-px h-12 bg-black/20 dark:bg-white/20 mx-2" />
+        <div className="w-px h-8 sm:h-12 bg-black/20 mx-1 sm:mx-2" />
         <DockIcon
           item={{
             href: "/settings",
@@ -91,19 +91,19 @@ function DockIcon({ item, isActive }: DockIconProps) {
         whileTap={{ scale: 0.95 }}
         transition={{ type: "spring", stiffness: 600, damping: 20 }}
         className={cn(
-          "relative flex items-center justify-center w-14 h-14 rounded-xl transition-all duration-200",
-          "border-2 border-black dark:border-white",
+          "relative flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl transition-all duration-200",
+          "border-2 border-black",
           isActive
             ? `${item.color} shadow-brutal-sm`
-            : "bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800"
+            : "bg-white hover:bg-gray-100"
         )}
       >
         <Icon
           className={cn(
-            "w-7 h-7 transition-colors",
+            "w-5 h-5 sm:w-7 sm:h-7 transition-colors",
             isActive
-              ? "text-white dark:text-black"
-              : "text-black dark:text-white"
+              ? "text-white"
+              : "text-black"
           )}
           strokeWidth={2.5}
         />
@@ -112,20 +112,20 @@ function DockIcon({ item, isActive }: DockIconProps) {
         {isActive && (
           <motion.div
             layoutId="dock-indicator"
-            className="absolute -bottom-1.5 w-3 h-3 rounded-full bg-black dark:bg-white"
+            className="absolute -bottom-1 sm:-bottom-1.5 w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-black"
             transition={{ type: "spring", stiffness: 500, damping: 30 }}
           />
         )}
       </motion.div>
 
-      {/* Tooltip */}
+      {/* Tooltip - hidden on mobile, visible on hover for desktop */}
       <motion.div
         initial={{ opacity: 0, y: 10, scale: 0.8 }}
         whileHover={{ opacity: 1, y: 0, scale: 1 }}
-        className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-black dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-wider rounded border-2 border-black dark:border-white whitespace-nowrap pointer-events-none"
+        className="hidden sm:block absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-xs font-bold uppercase tracking-wider rounded border-2 border-black whitespace-nowrap pointer-events-none"
       >
         {item.label}
-        <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black dark:border-t-white" />
+        <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black" />
       </motion.div>
     </Link>
   );

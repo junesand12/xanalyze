@@ -122,9 +122,9 @@ export function NodeGrid() {
   return (
     <div className="space-y-4">
       {/* Filters */}
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center gap-2 sm:gap-3">
         {/* Search */}
-        <div className="relative flex-1 min-w-[200px] max-w-md">
+        <div className="relative w-full sm:flex-1 sm:min-w-[200px] sm:max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
             type="text"
@@ -132,22 +132,22 @@ export function NodeGrid() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className={cn(
-              'w-full pl-10 pr-4 py-2 rounded-lg',
-              'border-3 border-black dark:border-white',
-              'bg-white dark:bg-gray-900',
-              'font-medium placeholder:text-gray-400',
+              'w-full pl-10 pr-4 py-2 rounded-lg text-sm sm:text-base',
+              'border-3 border-black',
+              'bg-white',
+              'font-medium placeholder',
               'focus:outline-none focus:ring-2 focus:ring-purple'
             )}
           />
         </div>
 
         {/* Status filter buttons */}
-        <div className="flex border-3 border-black dark:border-white rounded-lg overflow-hidden">
+        <div className="flex border-3 border-black rounded-lg overflow-hidden w-full sm:w-auto">
           <FilterButton
             active={statusFilter === 'all'}
             onClick={() => setStatusFilter('all')}
           >
-            All ({nodes.length})
+            <span className="hidden sm:inline">All </span>({nodes.length})
           </FilterButton>
           <FilterButton
             active={statusFilter === 'online'}
@@ -155,7 +155,7 @@ export function NodeGrid() {
             className="border-l-2"
           >
             <span className="w-2 h-2 rounded-full bg-green mr-1" />
-            Online ({onlineCount})
+            <span className="hidden sm:inline">Online </span>({onlineCount})
           </FilterButton>
           <FilterButton
             active={statusFilter === 'offline'}
@@ -163,7 +163,7 @@ export function NodeGrid() {
             className="border-l-2"
           >
             <span className="w-2 h-2 rounded-full bg-orange mr-1" />
-            Offline ({offlineCount})
+            <span className="hidden sm:inline">Offline </span>({offlineCount})
           </FilterButton>
         </div>
 
@@ -173,11 +173,12 @@ export function NodeGrid() {
             value={versionFilter}
             onChange={(e) => setVersionFilter(e.target.value)}
             className={cn(
-              'px-3 py-2 rounded-lg',
-              'border-3 border-black dark:border-white',
-              'bg-white dark:bg-gray-900',
-              'font-bold text-sm uppercase',
-              'focus:outline-none focus:ring-2 focus:ring-purple'
+              'px-2 sm:px-3 py-2 rounded-lg',
+              'border-3 border-black',
+              'bg-white',
+              'font-bold text-xs sm:text-sm uppercase',
+              'focus:outline-none focus:ring-2 focus:ring-purple',
+              'flex-1 sm:flex-initial'
             )}
           >
             <option value="all">All Versions</option>
@@ -187,42 +188,56 @@ export function NodeGrid() {
           </select>
         )}
 
-        {/* View mode toggle */}
-        <div className="flex border-3 border-black dark:border-white rounded-lg overflow-hidden">
+        <div className="flex items-center gap-2 ml-auto">
+          {/* View mode toggle */}
+          <div className="flex border-3 border-black rounded-lg overflow-hidden">
+            <button
+              onClick={() => setViewMode('grid')}
+              className={cn(
+                'p-2 transition-colors',
+                viewMode === 'grid'
+                  ? 'bg-black text-white'
+                  : 'bg-white hover:bg-gray-100'
+              )}
+            >
+              <Grid className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setViewMode('table')}
+              className={cn(
+                'p-2 border-l-2 transition-colors',
+                viewMode === 'table'
+                  ? 'bg-black text-white'
+                  : 'bg-white hover:bg-gray-100'
+              )}
+            >
+              <List className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Refresh button */}
+          <BrutalButton
+            onClick={() => refreshData(true)}
+            disabled={isLoading}
+            variant="outline"
+            size="md"
+            className="hidden sm:flex"
+          >
+            <RefreshCw className={cn('w-4 h-4', isLoading && 'animate-spin')} />
+            <span className="hidden md:inline">Refresh</span>
+          </BrutalButton>
+          {/* Mobile refresh - icon only */}
           <button
-            onClick={() => setViewMode('grid')}
+            onClick={() => refreshData(true)}
+            disabled={isLoading}
             className={cn(
-              'p-2 transition-colors',
-              viewMode === 'grid'
-                ? 'bg-black text-white dark:bg-white dark:text-black'
-                : 'bg-white dark:bg-gray-900 hover:bg-gray-100'
+              'sm:hidden p-2 border-3 border-black rounded-lg bg-white hover:bg-gray-100 transition-colors',
+              isLoading && 'opacity-50'
             )}
           >
-            <Grid className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => setViewMode('table')}
-            className={cn(
-              'p-2 border-l-2 transition-colors',
-              viewMode === 'table'
-                ? 'bg-black text-white dark:bg-white dark:text-black'
-                : 'bg-white dark:bg-gray-900 hover:bg-gray-100'
-            )}
-          >
-            <List className="w-4 h-4" />
+            <RefreshCw className={cn('w-4 h-4', isLoading && 'animate-spin')} />
           </button>
         </div>
-
-        {/* Refresh button */}
-        <BrutalButton
-          onClick={() => refreshData(true)}
-          disabled={isLoading}
-          variant="outline"
-          size="md"
-        >
-          <RefreshCw className={cn('w-4 h-4', isLoading && 'animate-spin')} />
-          Refresh
-        </BrutalButton>
       </div>
 
       {/* Results count */}
@@ -245,7 +260,7 @@ export function NodeGrid() {
       ) : filteredNodes.length === 0 ? (
         <div className="text-center py-12">
           <Filter className="w-12 h-12 mx-auto text-gray-400 mb-4" />
-          <h3 className="text-lg font-bold text-gray-600 dark:text-gray-400">
+          <h3 className="text-lg font-bold text-gray-600">
             No nodes found
           </h3>
           <p className="text-gray-500 mt-1">
@@ -262,14 +277,14 @@ export function NodeGrid() {
         </div>
       ) : (
         /* Table View */
-        <div className="border-3 border-black dark:border-white rounded-lg overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="border-3 border-black rounded-lg overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="border-b-3 border-black dark:border-white" style={{ backgroundColor: '#F3F4F6' }}>
+              <thead className="border-b-3 border-black" style={{ backgroundColor: '#F3F4F6' }}>
                 <tr>
                   <th className="text-left p-3 font-bold uppercase text-xs">#</th>
                   <th
-                    className="text-left p-3 font-bold uppercase text-xs cursor-pointer hover:bg-gray-200 transition-colors"
+                    className="text-left p-3 font-bold uppercase text-xs cursor-pointer hover transition-colors"
                     onClick={() => handleSort('label')}
                   >
                     <div className="flex items-center gap-1">
@@ -277,7 +292,7 @@ export function NodeGrid() {
                     </div>
                   </th>
                   <th
-                    className="text-left p-3 font-bold uppercase text-xs cursor-pointer hover:bg-gray-200 transition-colors"
+                    className="text-left p-3 font-bold uppercase text-xs cursor-pointer hover transition-colors"
                     onClick={() => handleSort('location')}
                   >
                     <div className="flex items-center gap-1">
@@ -285,7 +300,7 @@ export function NodeGrid() {
                     </div>
                   </th>
                   <th
-                    className="text-left p-3 font-bold uppercase text-xs cursor-pointer hover:bg-gray-200 transition-colors"
+                    className="text-left p-3 font-bold uppercase text-xs cursor-pointer hover transition-colors"
                     onClick={() => handleSort('status')}
                   >
                     <div className="flex items-center gap-1">
@@ -293,7 +308,7 @@ export function NodeGrid() {
                     </div>
                   </th>
                   <th
-                    className="text-left p-3 font-bold uppercase text-xs cursor-pointer hover:bg-gray-200 transition-colors"
+                    className="text-left p-3 font-bold uppercase text-xs cursor-pointer hover transition-colors"
                     onClick={() => handleSort('version')}
                   >
                     <div className="flex items-center gap-1">
@@ -301,7 +316,7 @@ export function NodeGrid() {
                     </div>
                   </th>
                   <th
-                    className="text-right p-3 font-bold uppercase text-xs cursor-pointer hover:bg-gray-200 transition-colors"
+                    className="text-right p-3 font-bold uppercase text-xs cursor-pointer hover transition-colors"
                     onClick={() => handleSort('cpu')}
                   >
                     <div className="flex items-center justify-end gap-1">
@@ -309,7 +324,7 @@ export function NodeGrid() {
                     </div>
                   </th>
                   <th
-                    className="text-right p-3 font-bold uppercase text-xs cursor-pointer hover:bg-gray-200 transition-colors"
+                    className="text-right p-3 font-bold uppercase text-xs cursor-pointer hover transition-colors"
                     onClick={() => handleSort('storage')}
                   >
                     <div className="flex items-center justify-end gap-1">
@@ -317,7 +332,7 @@ export function NodeGrid() {
                     </div>
                   </th>
                   <th
-                    className="text-right p-3 font-bold uppercase text-xs cursor-pointer hover:bg-gray-200 transition-colors"
+                    className="text-right p-3 font-bold uppercase text-xs cursor-pointer hover transition-colors"
                     onClick={() => handleSort('uptime')}
                   >
                     <div className="flex items-center justify-end gap-1">
@@ -330,7 +345,7 @@ export function NodeGrid() {
                 {filteredNodes.map((node, index) => (
                   <tr
                     key={node.address}
-                    className="hover:bg-gray-50 cursor-pointer transition-colors"
+                    className="hover cursor-pointer transition-colors"
                     onClick={() => setSelectedNode(node)}
                   >
                     <td className="p-3 text-gray-500 font-mono">{index + 1}</td>
@@ -418,10 +433,10 @@ function FilterButton({ active, onClick, children, className }: FilterButtonProp
     <button
       onClick={onClick}
       className={cn(
-        'flex items-center px-3 py-2 text-sm font-bold uppercase tracking-wide transition-colors',
+        'flex items-center justify-center gap-1 flex-1 px-2 sm:px-3 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wide transition-colors min-h-[44px]',
         active
-          ? 'bg-black text-white dark:bg-white dark:text-black'
-          : 'bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800',
+          ? 'bg-black text-white'
+          : 'bg-white hover:bg-gray-100',
         className
       )}
     >

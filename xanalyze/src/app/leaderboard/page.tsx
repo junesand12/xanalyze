@@ -324,8 +324,8 @@ function SortButton({ active, onClick, icon: Icon, label }: SortButtonProps) {
       className={cn(
         'flex items-center gap-2 px-3 py-2 rounded-lg border-2 font-bold text-sm uppercase transition-all',
         active
-          ? 'bg-black text-white dark:bg-white dark:text-black border-black dark:border-white shadow-brutal-sm'
-          : 'bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 hover:border-black dark:hover:border-white'
+          ? 'bg-black text-white border-black shadow-brutal-sm'
+          : 'bg-white border-gray-300 hover:border-black'
       )}
     >
       <Icon className="w-4 h-4" />

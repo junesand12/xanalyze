@@ -25,7 +25,7 @@ export default function ActivityPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
         <PageHeader
           title="Activity"
           description="Real-time network activity and recent events"
@@ -38,15 +38,15 @@ export default function ActivityPage() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex items-center justify-between mb-6"
+          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6"
         >
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
             <div className="flex items-center gap-2">
               <Activity className="w-5 h-5 text-purple animate-pulse" />
-              <span className="font-bold">Live Activity Feed</span>
+              <span className="font-bold text-sm sm:text-base">Live Activity Feed</span>
             </div>
             {lastUpdate && (
-              <span className="text-sm text-gray-500">
+              <span className="text-xs sm:text-sm text-gray-500">
                 Updated {lastUpdate.toLocaleTimeString()}
               </span>
             )}
@@ -54,14 +54,14 @@ export default function ActivityPage() {
           <button
             onClick={() => refreshData(true)}
             disabled={isLoading}
-            className="flex items-center gap-2 text-sm font-bold uppercase text-purple hover:text-purple-dark transition-colors"
+            className="flex items-center gap-2 text-xs sm:text-sm font-bold uppercase text-purple hover:text-purple-dark transition-colors self-start sm:self-auto"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
             Refresh
           </button>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* Recent Updates */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -78,38 +78,38 @@ export default function ActivityPage() {
                 </BrutalCardTitle>
               </BrutalCardHeader>
               <BrutalCardContent>
-                <div className="space-y-2 max-h-[500px] overflow-y-auto">
+                <div className="space-y-2 md:max-h-[500px] md:overflow-y-auto">
                   {recentActivity.length === 0 ? (
                     <p className="text-gray-500 text-center py-8">No recent activity</p>
                   ) : (
-                    recentActivity.map((node, i) => (
+                    recentActivity.slice(0, 10).map((node, i) => (
                       <motion.div
                         key={node.address}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: i * 0.03 }}
-                        className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg border-2 border-black/10 dark:border-white/10"
+                        className="flex items-center justify-between p-2.5 sm:p-3 bg-white rounded-lg border-2 border-black/10"
                       >
-                        <div className="flex items-center gap-3">
-                          <span className={`w-2 h-2 rounded-full ${
+                        <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                          <span className={`w-2 h-2 rounded-full flex-shrink-0 ${
                             node.status === 'online' ? 'bg-green' : 'bg-orange'
                           }`} />
-                          <div>
-                            <p className="font-bold text-sm">
+                          <div className="min-w-0 flex-1">
+                            <p className="font-bold text-xs sm:text-sm truncate">
                               {node.pubkey ? shortenAddress(node.pubkey, 6) : node.label}
                             </p>
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-gray-500 truncate">
                               {node.location ? `${node.location.city}, ${node.location.country}` : node.ip}
                             </p>
                           </div>
                         </div>
-                        <div className="text-right">
+                        <div className="text-right flex-shrink-0 ml-2">
                           <span className={`text-xs font-bold uppercase ${
                             node.status === 'online' ? 'text-green' : 'text-orange'
                           }`}>
                             {node.status}
                           </span>
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs text-gray-500 hidden sm:block">
                             {node.lastFetched && new Date(node.lastFetched).toLocaleTimeString()}
                           </p>
                         </div>
@@ -137,7 +137,7 @@ export default function ActivityPage() {
                 </BrutalCardTitle>
               </BrutalCardHeader>
               <BrutalCardContent>
-                <div className="space-y-2 max-h-[500px] overflow-y-auto">
+                <div className="space-y-2 md:max-h-[500px] md:overflow-y-auto">
                   {activeNodes.length === 0 ? (
                     <p className="text-gray-500 text-center py-8">No active nodes</p>
                   ) : (
@@ -147,23 +147,23 @@ export default function ActivityPage() {
                         initial={{ opacity: 0, x: 10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: i * 0.03 }}
-                        className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg border-2 border-black/10 dark:border-white/10"
+                        className="flex items-center justify-between p-2.5 sm:p-3 bg-white rounded-lg border-2 border-black/10"
                       >
-                        <div className="flex items-center gap-3">
-                          <span className="w-6 h-6 flex items-center justify-center bg-green/10 text-green font-bold text-sm rounded">
+                        <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                          <span className="w-6 h-6 flex items-center justify-center bg-green/10 text-green font-bold text-xs sm:text-sm rounded flex-shrink-0">
                             {i + 1}
                           </span>
-                          <div>
-                            <p className="font-bold text-sm">
+                          <div className="min-w-0 flex-1">
+                            <p className="font-bold text-xs sm:text-sm truncate">
                               {node.pubkey ? shortenAddress(node.pubkey, 6) : node.label}
                             </p>
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-gray-500 truncate">
                               Uptime: {formatUptime(node.stats?.uptime || 0)}
                             </p>
                           </div>
                         </div>
-                        <div className="text-right">
-                          <p className="font-mono font-bold text-green">
+                        <div className="text-right flex-shrink-0 ml-2">
+                          <p className="font-mono font-bold text-green text-xs sm:text-base">
                             {(node.stats?.packets_received || 0).toLocaleString()}
                           </p>
                           <p className="text-xs text-gray-500">packets</p>
@@ -193,7 +193,7 @@ export default function ActivityPage() {
                 </BrutalCardTitle>
               </BrutalCardHeader>
               <BrutalCardContent>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                   <SummaryCard
                     label="Total Packets"
                     value={nodes
@@ -243,9 +243,9 @@ interface SummaryCardProps {
 
 function SummaryCard({ label, value, subtext }: SummaryCardProps) {
   return (
-    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border-2 border-black/10 dark:border-white/10">
-      <p className="text-xs font-bold uppercase text-gray-500 mb-1">{label}</p>
-      <p className="text-2xl font-bold">{value}</p>
+    <div className="bg-white p-3 sm:p-4 rounded-lg border-2 border-black/10">
+      <p className="text-xs font-bold uppercase text-gray-500 mb-1 truncate">{label}</p>
+      <p className="text-lg sm:text-2xl font-bold break-words">{value}</p>
       <p className="text-xs text-gray-500">{subtext}</p>
     </div>
   )

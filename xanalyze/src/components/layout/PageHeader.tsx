@@ -33,15 +33,15 @@ export function PageHeader({
       className={cn('mb-8', className)}
     >
       <div className="flex items-start justify-between gap-4 flex-wrap">
-        <div>
+        <div className="flex-1 min-w-0">
           <h1 className={cn(
-            'text-4xl md:text-5xl font-bold uppercase tracking-tight text-shadow-brutal',
+            'text-3xl sm:text-4xl md:text-5xl font-bold uppercase tracking-tight text-shadow-brutal',
             variantStyles[variant]
           )}>
             {title}
           </h1>
           {description && (
-            <p className="text-gray-600 dark:text-gray-400 mt-2 max-w-xl">
+            <p className="text-sm sm:text-base text-gray-600 mt-2 max-w-xl">
               {description}
             </p>
           )}

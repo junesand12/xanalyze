@@ -60,11 +60,11 @@ export function NetworkStats() {
 
   if (registryStatus === 'loading' && nodes.length === 0) {
     return (
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {[...Array(6)].map((_, i) => (
           <div
             key={i}
-            className="brutal-card rounded-lg p-4 h-32 animate-pulse bg-gray-100 dark:bg-gray-800"
+            className="brutal-card rounded-lg p-4 h-32 animate-pulse bg-gray-100"
           />
         ))}
       </div>
@@ -76,7 +76,7 @@ export function NetworkStats() {
       variants={container}
       initial="hidden"
       animate="show"
-      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
+      className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
     >
       <motion.div variants={item}>
         <StatCard

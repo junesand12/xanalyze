@@ -12,7 +12,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
         <PageHeader
           title="Dashboard"
           description="Real-time monitoring of Xandeum pNode network infrastructure"
@@ -26,10 +26,10 @@ export default function DashboardPage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="mb-6 text-sm text-gray-500 flex items-center gap-2"
+            className="mb-4 sm:mb-6 text-xs sm:text-sm text-gray-500 flex items-center gap-2 flex-wrap"
           >
-            <span className="w-2 h-2 rounded-full bg-green animate-pulse" />
-            Last updated: {lastUpdate.toLocaleTimeString()}
+            <span className="w-2 h-2 rounded-full bg-green animate-pulse flex-shrink-0" />
+            <span>Last updated: {lastUpdate.toLocaleTimeString()}</span>
             {isCached && (
               <span className="text-xs bg-yellow/20 text-yellow-dark px-2 py-0.5 rounded font-medium">
                 CACHED
@@ -39,8 +39,8 @@ export default function DashboardPage() {
         )}
 
         {/* Network Stats */}
-        <section className="mb-8">
-          <h2 className="text-lg font-bold uppercase tracking-wide mb-4 text-gray-600 dark:text-gray-400">
+        <section className="mb-6 sm:mb-8">
+          <h2 className="text-base sm:text-lg font-bold uppercase tracking-wide mb-3 sm:mb-4 text-gray-600">
             Network Overview
           </h2>
           <NetworkStats />
@@ -48,7 +48,7 @@ export default function DashboardPage() {
 
         {/* Node Grid */}
         <section>
-          <h2 className="text-lg font-bold uppercase tracking-wide mb-4 text-gray-600 dark:text-gray-400">
+          <h2 className="text-base sm:text-lg font-bold uppercase tracking-wide mb-3 sm:mb-4 text-gray-600">
             All Nodes
           </h2>
           <NodeGrid />

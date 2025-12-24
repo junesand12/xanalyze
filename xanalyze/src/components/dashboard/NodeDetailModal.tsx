@@ -101,11 +101,11 @@ export function NodeDetailModal({ node, onClose }: NodeDetailModalProps) {
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
             className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[101] w-full max-w-5xl px-4"
           >
-            <div className="bg-white dark:bg-gray-900 border-3 border-black dark:border-white rounded-xl shadow-brutal overflow-hidden max-h-[85vh] flex flex-col">
+            <div className="bg-white border-3 border-black rounded-xl shadow-brutal overflow-hidden max-h-[85vh] flex flex-col">
               {/* Header */}
               <div
                 className={cn(
-                  "p-4 border-b-3 border-black dark:border-white flex-shrink-0",
+                  "p-4 border-b-3 border-black flex-shrink-0",
                   isOnline ? "bg-green/10" : "bg-orange/10"
                 )}
               >
@@ -119,14 +119,14 @@ export function NodeDetailModal({ node, onClose }: NodeDetailModalProps) {
                       <StatusBadge status={node.status} size="sm" />
                     </div>
                     {node.version && (
-                      <span className="text-sm font-mono text-gray-600 dark:text-gray-400">
+                      <span className="text-sm font-mono text-gray-600">
                         Version {node.version.version}
                       </span>
                     )}
                   </div>
                   <button
                     onClick={onClose}
-                    className="p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-lg transition-colors"
+                    className="p-2 hover rounded-lg transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -134,14 +134,14 @@ export function NodeDetailModal({ node, onClose }: NodeDetailModalProps) {
               </div>
 
               {/* Tabs */}
-              <div className="flex border-b-3 border-black dark:border-white flex-shrink-0">
+              <div className="flex border-b-3 border-black flex-shrink-0">
                 <button
                   onClick={() => setActiveTab("details")}
                   className={cn(
                     "flex-1 px-4 py-2 text-sm font-bold flex items-center justify-center gap-2 transition-colors",
                     activeTab === "details"
                       ? "bg-purple text-white"
-                      : "bg-white hover:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800"
+                      : "bg-white hover:bg-gray-100"
                   )}
                 >
                   <Activity className="w-4 h-4" />
@@ -150,10 +150,10 @@ export function NodeDetailModal({ node, onClose }: NodeDetailModalProps) {
                 <button
                   onClick={() => setActiveTab("history")}
                   className={cn(
-                    "flex-1 px-4 py-2 text-sm font-bold flex items-center justify-center gap-2 border-l-3 border-black dark:border-white transition-colors",
+                    "flex-1 px-4 py-2 text-sm font-bold flex items-center justify-center gap-2 border-l-3 border-black transition-colors",
                     activeTab === "history"
                       ? "bg-purple text-white"
-                      : "bg-white hover:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800"
+                      : "bg-white hover:bg-gray-100"
                   )}
                 >
                   <History className="w-4 h-4" />
@@ -171,14 +171,14 @@ export function NodeDetailModal({ node, onClose }: NodeDetailModalProps) {
                         Address
                       </label>
                       <div className="flex items-center gap-2">
-                        <code className="flex-1 text-sm font-mono bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded-lg truncate">
+                        <code className="flex-1 text-sm font-mono bg-gray-100 px-3 py-2 rounded-lg truncate">
                           {node.address}
                         </code>
                         <button
                           onClick={() =>
                             copyToClipboard(node.address, "address")
                           }
-                          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                          className="p-2 hover rounded-lg transition-colors"
                         >
                           {copiedField === "address" ? (
                             <Check className="w-4 h-4 text-green" />
@@ -196,14 +196,14 @@ export function NodeDetailModal({ node, onClose }: NodeDetailModalProps) {
                           Public Key
                         </label>
                         <div className="flex items-center gap-2">
-                          <code className="flex-1 text-sm font-mono bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded-lg truncate">
+                          <code className="flex-1 text-sm font-mono bg-gray-100 px-3 py-2 rounded-lg truncate">
                             {node.pubkey}
                           </code>
                           <button
                             onClick={() =>
                               copyToClipboard(node.pubkey!, "pubkey")
                             }
-                            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                            className="p-2 hover rounded-lg transition-colors"
                           >
                             {copiedField === "pubkey" ? (
                               <Check className="w-4 h-4 text-green" />
@@ -286,7 +286,7 @@ export function NodeDetailModal({ node, onClose }: NodeDetailModalProps) {
                             key={option.value}
                             onClick={() => setHistoryPeriod(option.value)}
                             className={cn(
-                              "px-2 py-1 text-xs font-bold transition-colors border-r border-black last:border-r-0",
+                              "px-2 py-1 text-xs font-bold transition-colors border-r border-black last",
                               historyPeriod === option.value
                                 ? "bg-purple text-white"
                                 : "bg-white hover:bg-gray-100"
@@ -375,7 +375,7 @@ export function NodeDetailModal({ node, onClose }: NodeDetailModalProps) {
               </div>
 
               {/* Footer */}
-              <div className="p-4 border-t-3 border-black/10 dark:border-white/10 flex gap-3 flex-shrink-0">
+              <div className="p-4 border-t-3 border-black/10 flex gap-3 flex-shrink-0">
                 <BrutalButton
                   onClick={onClose}
                   variant="outline"

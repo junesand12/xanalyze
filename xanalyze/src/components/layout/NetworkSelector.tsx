@@ -33,8 +33,8 @@ export function NetworkSelector() {
         whileTap={{ scale: 0.98 }}
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          'flex items-center gap-3 px-4 py-2 rounded-lg border-3 border-black dark:border-white',
-          'bg-white dark:bg-gray-900 shadow-brutal-sm',
+          'flex items-center gap-3 px-4 py-2 rounded-lg border-3 border-black',
+          'bg-white shadow-brutal-sm',
           'font-bold uppercase tracking-wide text-sm',
           'transition-all duration-150'
         )}
@@ -65,7 +65,7 @@ export function NetworkSelector() {
           transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           className={cn(
             'absolute top-full mt-2 right-0 z-50',
-            'bg-white dark:bg-gray-900 border-3 border-black dark:border-white',
+            'bg-white border-3 border-black',
             'rounded-lg shadow-brutal overflow-hidden min-w-[200px]'
           )}
         >
@@ -86,7 +86,7 @@ export function NetworkSelector() {
               />
             ))}
           </div>
-          <div className="border-t-2 border-black dark:border-white p-2">
+          <div className="border-t-2 border-black p-2">
             <div className="px-3 py-2 text-xs font-bold uppercase tracking-wider text-gray-500 flex items-center gap-2">
               <Wifi className="w-3 h-3" />
               Mainnet
@@ -123,8 +123,8 @@ function NetworkOption({ network, isSelected, onClick }: NetworkOptionProps) {
         'w-full flex items-center gap-3 px-3 py-2 rounded-md',
         'font-medium text-sm transition-colors',
         isSelected
-          ? 'bg-black text-white dark:bg-white dark:text-black'
-          : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+          ? 'bg-black text-white'
+          : 'hover:bg-gray-100'
       )}
     >
       <div className={cn(

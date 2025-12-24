@@ -58,7 +58,7 @@ export default function SettingsPage() {
                 </BrutalCardTitle>
               </BrutalCardHeader>
               <BrutalCardContent>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                <p className="text-gray-600 mb-4">
                   Clear cached data to fetch fresh information from the network.
                   This includes node data, geolocation, and registry information.
                 </p>
@@ -121,13 +121,13 @@ interface ShortcutProps {
 
 function Shortcut({ keys, description }: ShortcutProps) {
   return (
-    <div className="flex items-center justify-between p-2 bg-gray-100 dark:bg-gray-800 rounded">
-      <span className="text-gray-600 dark:text-gray-400">{description}</span>
+    <div className="flex items-center justify-between p-2 bg-green/5 rounded border-2 border-green/20">
+      <span className="text-gray-700 font-medium">{description}</span>
       <div className="flex items-center gap-1">
         {keys.map((key, i) => (
           <kbd
             key={i}
-            className="px-2 py-1 bg-white dark:bg-gray-700 border-2 border-black dark:border-white rounded font-mono text-xs font-bold"
+            className="px-2 py-1 bg-green text-white border-2 border-black rounded font-mono text-xs font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
           >
             {key}
           </kbd>

@@ -262,7 +262,7 @@ export function NetworkTopology2D() {
       </div>
 
       {/* Legend */}
-      <div className="absolute top-4 right-4 z-10 brutal-card rounded-lg p-3 bg-white/90 dark:bg-black/90">
+      <div className="absolute top-4 right-4 z-10 brutal-card rounded-lg p-3 bg-white/90">
         <h3 className="text-xs font-bold uppercase tracking-wider mb-2 text-gray-600">
           Regions
         </h3>
@@ -285,7 +285,7 @@ export function NetworkTopology2D() {
         ref={svgRef}
         width={dimensions.width}
         height={dimensions.height}
-        className="cursor-grab active:cursor-grabbing bg-gray-50 dark:bg-gray-950"
+        className="cursor-grab active:cursor-grabbing bg-gray-50"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -311,7 +311,7 @@ export function NetworkTopology2D() {
               fill="none"
               stroke="currentColor"
               strokeWidth="0.5"
-              className="text-gray-200 dark:text-gray-800"
+              className="text-gray-200"
             />
           </pattern>
           <rect width="100%" height="100%" fill="url(#grid)" />
@@ -411,7 +411,7 @@ export function NetworkTopology2D() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="absolute bottom-4 right-4 z-10 brutal-card rounded-lg p-4 bg-white dark:bg-gray-900 w-72"
+            className="absolute bottom-4 right-4 z-10 brutal-card rounded-lg p-4 bg-white w-72"
           >
             <button
               onClick={() => setSelectedNode(null)}

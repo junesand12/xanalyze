@@ -215,7 +215,7 @@ export default function AnalyticsPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
         <PageHeader
           title="Analytics"
           description="Network statistics and performance metrics"
@@ -225,7 +225,7 @@ export default function AnalyticsPage() {
         </PageHeader>
 
         {/* View Mode Toggle */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <div className="flex gap-2">
             <BrutalButton
               variant={viewMode === "current" ? "purple" : "default"}
@@ -246,14 +246,14 @@ export default function AnalyticsPage() {
           </div>
 
           {viewMode === "historical" && (
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               {/* Period Selector */}
-              <div className="flex border-3 border-black overflow-hidden">
+              <div className="flex border-3 border-black overflow-hidden rounded-lg">
                 {PERIOD_OPTIONS.map((option) => (
                   <button
                     key={option.value}
                     onClick={() => setSelectedPeriod(option.value)}
-                    className={`px-3 py-1.5 text-xs font-bold transition-all border-r-3 border-black last:border-r-0 ${
+                    className={`flex-1 sm:flex-none px-3 py-1.5 text-xs font-bold transition-all border-r-3 border-black last:border-r-0 ${
                       selectedPeriod === option.value
                         ? "bg-purple text-white"
                         : "bg-white hover:bg-gray-100"
@@ -269,6 +269,7 @@ export default function AnalyticsPage() {
                 size="sm"
                 onClick={handleRefreshHistorical}
                 disabled={isHistoricalLoading}
+                className="w-full sm:w-auto"
               >
                 <RefreshCw
                   className={`w-4 h-4 mr-2 ${

@@ -53,7 +53,7 @@ export function NodeCard({ node, onClick, className }: NodeCardProps) {
       </div>
 
       {/* Location - fixed height */}
-      <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-3 min-h-[24px]">
+      <div className="flex items-center gap-2 text-sm text-gray-600 mb-3 min-h-[24px]">
         {node.location ? (
           <>
             <MapPin className="w-4 h-4 flex-shrink-0" />
@@ -68,7 +68,7 @@ export function NodeCard({ node, onClick, className }: NodeCardProps) {
       </div>
 
       {/* Stats section - fixed height with flex-grow to push to bottom */}
-      <div className="mt-auto pt-3 border-t-2 border-black/10 dark:border-white/10 min-h-[72px] flex items-center">
+      <div className="mt-auto pt-3 border-t-2 border-black/10 min-h-[72px] flex items-center">
         {isOnline && node.stats ? (
           <div className="grid grid-cols-3 gap-2 w-full">
             <StatMini

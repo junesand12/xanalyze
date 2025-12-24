@@ -39,6 +39,8 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${spaceGrotesk.variable} ${spaceMono.variable}`}
+      style={{ colorScheme: "light" }}
+      suppressHydrationWarning
     >
       <body
         className="antialiased min-h-screen bg-background text-foreground"
@@ -47,13 +49,13 @@ export default function RootLayout({
         }}
       >
         <NodesProvider>
-          <main className="pb-28 relative z-10">{children}</main>
+          <main className="pb-20 sm:pb-28 relative z-10">{children}</main>
           <Dock />
-          {/* Logo - bottom right */}
+          {/* Logo - bottom right (hidden on mobile) */}
           <img
             src="/logo.png"
             alt="Xanalyze"
-            className="fixed bottom-4 right-4 w-48 h-auto z-50 pointer-events-none select-none"
+            className="hidden sm:block fixed bottom-4 right-4 w-48 h-auto z-50 pointer-events-none select-none"
           />
         </NodesProvider>
       </body>

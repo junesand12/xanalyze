@@ -12,12 +12,12 @@ interface BrutalButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> 
 }
 
 const variantStyles = {
-  default: 'bg-black text-white dark:bg-white dark:text-black',
+  default: 'bg-black text-white',
   purple: 'bg-purple text-white',
   green: 'bg-green text-white',
   orange: 'bg-orange text-white',
   yellow: 'bg-yellow text-black',
-  outline: 'bg-transparent text-black dark:text-white',
+  outline: 'bg-transparent text-black',
 }
 
 const sizeStyles = {

@@ -13,7 +13,7 @@ export default function TopologyPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
         <PageHeader
           title="Topology"
           description="Interactive 2D visualization of network node connections"
@@ -26,22 +26,22 @@ export default function TopologyPage() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-4 flex items-center justify-between text-sm"
+          className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm"
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <div className="flex items-center gap-2">
               <Network className="w-4 h-4 text-green" />
               <span className="font-bold">{onlineCount}</span>
-              <span className="text-gray-500">online nodes</span>
+              <span className="text-gray-500 text-xs sm:text-sm">online nodes</span>
             </div>
             <div className="w-px h-4 bg-gray-300" />
             <div className="flex items-center gap-2">
               <span className="font-bold">{nodes.length - onlineCount}</span>
-              <span className="text-gray-500">offline</span>
+              <span className="text-gray-500 text-xs sm:text-sm">offline</span>
             </div>
           </div>
-          <span className="text-xs text-gray-500">
-            <strong>Tip:</strong> Scroll to zoom, drag to pan, click nodes for details.
+          <span className="text-xs text-gray-500 hidden md:block">
+            <strong>Tip:</strong> Pinch to zoom, drag to pan, tap nodes for details.
           </span>
         </motion.div>
 
@@ -50,7 +50,7 @@ export default function TopologyPage() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
-          className="brutal-card rounded-lg overflow-hidden h-[calc(100vh-280px)] min-h-[500px]"
+          className="brutal-card rounded-lg overflow-hidden h-[calc(100vh-240px)] sm:h-[calc(100vh-280px)] min-h-[400px] sm:min-h-[500px]"
         >
           {registryStatus === 'error' ? (
             <div className="flex flex-col items-center justify-center h-full text-center p-8">
